@@ -28,8 +28,8 @@ def exercise01():
     '''
 
     # ------ Place code below here \/ \/ \/ ------
+    df = pd.DataFrame([[120, 23, 36, 41], [50, 66, 27, 81], [9, 123, 11, 8]])
     
-
     # ------ Place code above here /\ /\ /\ ------
 
     return df
@@ -39,7 +39,7 @@ def exercise02(a):
 
     # ------ Place code below here \/ \/ \/ ------
     
-    
+    array = np.array(a)
     # ------ Place code above here /\ /\ /\ ------
 
     return array
@@ -48,7 +48,8 @@ def exercise03(a):
     # The function exercise03() receives an ndarray of integers. Return the sum of those integers using NumPy.
 
     # ------ Place code below here \/ \/ \/ ------
-    
+
+    sum = np.sum(a)
 
     # ------ Place code above here /\ /\ /\ ------
     return sum
@@ -57,7 +58,7 @@ def exercise04(a):
     # The function exercise04() receives an ndarray matrix (2D) of integers. Return the sum of the 2nd column using NumPy.
 
     # ------ Place code below here \/ \/ \/ ------
-    
+    sum = np.sum(a[:, 1])
 
     # ------ Place code above here /\ /\ /\ ------
     return sum
@@ -66,7 +67,7 @@ def exercise05(n):
     # The function exercise05() receives an integer n. Return an ndarray filled with zeros of size n x n (n rows, n columns)
 
     # ------ Place code below here \/ \/ \/ ------
-    
+    zeros = np.zeros((n, n))
 
     # ------ Place code above here /\ /\ /\ ------
     return zeros
@@ -75,7 +76,7 @@ def exercise06(n):
     # The function exercise06() receives an integer n. Return an ndarray filled with ones of size n x n (n rows, n columns)
 
     # ------ Place code below here \/ \/ \/ ------
-    
+    ones = np.ones((n, n))
 
     # ------ Place code above here /\ /\ /\ ------
     return ones
@@ -85,7 +86,7 @@ def exercise07(sd,m,s):
     # Return an ndarray filled with s random numbers conforming to a normal distribution of standard deviation = sd and mean = m
 
     # ------ Place code below here \/ \/ \/ ------
-    
+    random_numbers = np.random.normal(m, sd, s)
     
     # ------ Place code above here /\ /\ /\ ------
     return random_numbers
@@ -101,7 +102,11 @@ def exercise08():
     '''
 
     # ------ Place code below here \/ \/ \/ ------
- 
+    df = pd.read_csv('https://tinyurl.com/y63q7okz')
+    row_count = df.shape[0]
+    avg_sq_ft = df['sq__ft'].mean()
+    df_zip_95670 = df[df['zip'] == 95670]
+    df_zip_not_95610 = df[df['zip'] != 95610]
 
     # ------ Place code above here /\ /\ /\ ------
 
@@ -111,7 +116,7 @@ def exercise08():
 def exercise10(n):
     # Create a numpy identity matrix of size n
     # ------ Place code below here \/ \/ \/ ------
-    
+    identity_matrix = np.eye(n)
 
     # ------ Place code above here /\ /\ /\ ------  
     return identity_matrix
@@ -122,7 +127,8 @@ def exercise11(n):
     Reshape the array. The reshaped array, array_reshaped, should be n/3 columns and 3 rows
     '''
     # ------ Place code below here \/ \/ \/ ------
-
+    array_1d = np.arange(n)
+    array_reshaped = array_1d.reshape(3, n//3)
     # ------ Place code above here /\ /\ /\ ------  
     return array_1d, array_reshaped
 
@@ -132,7 +138,7 @@ def exercise12(n):
     A checkerboard matrix is a matrix with alternating 1s and 0s across rows and columns with the top left value equal to 1
     '''
     # ------ Place code below here \/ \/ \/ ------
-    
+    checkerboard_matrix = np.indices((2*n, 2*n)).sum(axis=0) % 2
 
     # ------ Place code above here /\ /\ /\ ------ 
 
@@ -145,7 +151,8 @@ def exercise13(n):
     
     '''
     # ------ Place code below here \/ \/ \/ ------
-
+    s = pd.Series(np.random.randint(0, n+1, n), index=pd.date_range('2010-01-01', periods=n))
+    s.cumsum().plot()
    
     # ------ Place code above here /\ /\ /\ ------ 
     return s
@@ -158,8 +165,8 @@ def exercise14(words):
     Using Series.map() and lambdas may help.
     '''
     # ------ Place code below here \/ \/ \/ ------
-
-
+    df = pd.Series(words).map(len)
+    
     # ------ Place code above here /\ /\ /\ ------ 
     return df
 
@@ -170,7 +177,8 @@ def exercise15():
     and just the street address and zip code columns. This can be done with one line of code.
     '''
     # ------ Place code below here \/ \/ \/ ------
-
+    original_df = pd.read_csv('https://tinyurl.com/y63q7okz')
+    df = original_df.iloc[::5][['street', 'zip']]
 
 
     # ------ Place code above here /\ /\ /\ ------ 
